@@ -20,6 +20,12 @@ export function getUserInfo() {
 
   })
 }
+//根据用户的id获取头像
+export function getUserDetailById(id) {
+  return request({
+    url: `/sys/user/${id}`
+  })
+}
 
 export function logout() {
   return request({
