@@ -49,12 +49,11 @@ export default {
     height: 100%;
     width: 100%;
 
-    & .sidebar-logo {
+   .sidebar-logo {
       width: 140px;
       vertical-align: middle;
       margin-right: 12px;
-    }
-
+}
     & .sidebar-title {
       display: inline-block;
       margin: 0;

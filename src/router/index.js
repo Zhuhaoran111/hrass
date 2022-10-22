@@ -51,18 +51,48 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '首页', icon: 'dashboard' }
     }]
   },
-
-  // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  {
+    path: '/import',
+    component: Layout,
+    hidden: true, // 隐藏在左侧菜单中
+    children: [{
+      path: '', // 二级路由path什么都不写 表示二级默认路由
+      component: () => import('@/views/import')
+    }]
+  },
+  userRouter
 ]
 
+// 引入多个模块的规则
+import approvalsRouter from './modules/approvals'
+import departmentsRouter from './modules/departments'
+import employeesRouter from './modules/employees'
+import permissionRouter from './modules/permission'
+import attendancesRouter from './modules/attendances'
+import salarysRouter from './modules/salarys'
+import settingRouter from './modules/setting'
+import socialRouter from './modules/social'
+import userRouter from './modules/user'
+
+// 动态路由
+export const asyncRoutes = [
+  approvalsRouter,
+  departmentsRouter,
+  employeesRouter,
+  permissionRouter,
+  attendancesRouter,
+  salarysRouter,
+  settingRouter,
+  socialRouter
+]
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
-  routes: constantRoutes
+  mode: 'history', // require service support
+  base: 'hr/',
+  scrollBehavior: () => ({ y: 0 }), // 管理滚动行为 如果出现滚动 切换就让 让页面回到顶部
+  routes: [...constantRoutes] // 临时合并所有的路由
 })
 
 const router = createRouter()
